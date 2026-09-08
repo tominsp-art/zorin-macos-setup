@@ -12,23 +12,42 @@ Script de pós-instalação para deixar o Zorin OS 18 Core com visual macOS
 
 ## Como usar
 
-Depois de instalar o Zorin OS 18, abra o terminal e:
+Depois de instalar o Zorin OS 18, abra o terminal e rode **um único comando**:
 
 ```bash
-bash setup-macos.sh
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/tominsp-art/zorin-macos-setup/main/setup-macos.sh)"
 ```
 
-O script pedirá a senha do sudo no trecho de instalação de pacotes e,
-se detectar placa NVIDIA, perguntará se deseja instalar o driver.
+Para **pular** a instalação do driver NVIDIA no modo único:
+
+```bash
+ZORIN_DRIVER=skip bash -c "$(curl -fsSL https://raw.githubusercontent.com/tominsp-art/zorin-macos-setup/main/setup-macos.sh)"
+```
+
+> Se preferir baixar para inspecionar antes de rodar:
+> ```bash
+> curl -fsSL https://raw.githubusercontent.com/tominsp-art/zorin-macos-setup/main/setup-macos.sh -o setup-macos.sh && bash setup-macos.sh
+> ```
+
+O script pedirá a senha do sudo na instalação de pacotes e, se detectar
+placa NVIDIA, perguntará se deseja instalar o driver.
 
 Ao final, **saia e entre de novo na sessão** (ou reinicie).
+
+### Modo local (clonando o repositório)
+
+```bash
+git clone https://github.com/tominsp-art/zorin-macos-setup.git
+cd zorin-macos-setup && bash setup-macos.sh
+```
 
 ### Opções
 
 | Comando | Efeito |
 |---|---|
-| `bash setup-macos.sh` | Instala tudo e aplica o visual macOS |
-| `bash setup-macos.sh --no-nvidia` | Pula a instalação do driver NVIDIA |
+| `bash -c "$(curl -fsSL <url-do-setup>)"` | Baixa e executa tudo | 
+| `ZORIN_DRIVER=skip bash -c "$(curl -fsSL <url-do-setup>)"` | Pula a instalação do driver NVIDIA |
+| `bash setup-macos.sh --no-nvidia` | Pula o driver NVIDIA |
 | `bash setup-macos.sh --restore` | Restaura a aparência original (faz backup antes) |
 
 ## Ajustes manuais recomendados (pós-script)

@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
-# =============================================================================
-#  Zorin OS 18 Core -> visual macOS (WhiteSur)
-#  Tema: WhiteSur GTK, ícones, cursores, fontes SF Pro, wallpaper estilo macOS.
-#  Uso:  bash setup-macos.sh
-#        bash setup-macos.sh --no-nvidia   (pula a pergunta do driver NVIDIA)
-#        bash setup-macos.sh --restore     (restaura visual original)
-# =============================================================================
+# --------------------------------- exemplo de uso ---------------------------------
+#  Uso único (recomendado — baixa e executa direto):
+#    bash -c "$(curl -fsSL https://raw.githubusercontent.com/tominsp-art/zorin-macos-setup/main/setup-macos.sh)"
+#  Pular o driver NVIDIA no modo único:
+#    ZORIN_DRIVER=skip bash -c "$(curl -fsSL https://raw.githubusercontent.com/tominsp-art/zorin-macos-setup/main/setup-macos.sh)"
+#  Download para inspecionar antes:
+#    curl -fsSL https://raw.githubusercontent.com/tominsp-art/zorin-macos-setup/main/setup-macos.sh -o setup-macos.sh && bash setup-macos.sh
+# ---------------------------------------------------------------------------------
 set -euo pipefail
 
 # ------------------------- config -------------------------
@@ -22,7 +23,7 @@ WP_REPO="vinceliuice/WhiteSur-wallpapers"
 
 WORKDIR="${HOME}/.cache/macos-setup"
 BACKUP="${HOME}/.config/macos-setup-backup.conf"
-B=0; DRIVER="ask"
+B=0; DRIVER="${ZORIN_DRIVER:-ask}"
 
 for arg in "$@"; do
   case "$arg" in
